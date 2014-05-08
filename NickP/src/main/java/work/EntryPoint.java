@@ -8,6 +8,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class EntryPoint {
 
+	@SuppressWarnings("unchecked")
 	public static void main(String[] args) {
 
 		ApplicationContext ctx = new ClassPathXmlApplicationContext(
@@ -18,10 +19,10 @@ public class EntryPoint {
 
 		System.out.println(performer.getName());
 		
-		List testList = (List) ctx.getBean("cities");
-		for(Object c : testList) {
-			City fromList = (City)c;
-			System.out.println(fromList.getName());
+		List<City> testList = (List<City>) ctx.getBean("cities");
+		for(City c : testList) {
+			//City fromList = (City)c;
+			System.out.println(c.getName());
 		}
 
 		((ConfigurableApplicationContext) ctx).close();
