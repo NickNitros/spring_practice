@@ -3,6 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean id="duke" class="work.Juggler" />
+	<bean id="juggler" class="work.Juggler" scope="prototype" init-method="wakeUp" destroy-method="goSleep">
+		<constructor-arg value="15"></constructor-arg>
+		<property name="name" value="JimmyJim" />
+	</bean>
 
 </beans>

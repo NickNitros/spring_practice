@@ -8,11 +8,15 @@ public class EntryPoint {
 
 	public static void main(String[] args) {
 
-		ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-idol.xml");
-		Performer performer = (Performer) ctx.getBean("duke");
+		ApplicationContext ctx = new ClassPathXmlApplicationContext(
+				"spring-idol.xml");
+
+		Juggler performer = (Juggler) ctx.getBean("juggler");
 		performer.perform();
-		
-		((ConfigurableApplicationContext)ctx).close();
+
+		System.out.println(performer.getName());
+
+		((ConfigurableApplicationContext) ctx).close();
 	}
 
 }
