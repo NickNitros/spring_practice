@@ -1,5 +1,7 @@
 package work;
 
+import java.util.List;
+
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -15,6 +17,12 @@ public class EntryPoint {
 		performer.perform();
 
 		System.out.println(performer.getName());
+		
+		List testList = (List) ctx.getBean("cities");
+		for(Object c : testList) {
+			City fromList = (City)c;
+			System.out.println(fromList.getName());
+		}
 
 		((ConfigurableApplicationContext) ctx).close();
 	}
