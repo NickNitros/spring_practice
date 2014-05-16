@@ -36,13 +36,13 @@ public class LoginController {
 		System.out.println("result has errors: " + result.hasErrors());
 
 		System.out.println("User got: \"" + user.getEmail() + "\"");
-
+		
 		if (result.hasErrors()) {
 			return "login";
 		} else {
 			// if login is successful
 			if(userService.login(user.getEmail(),user.getPassword())){
-				return "main";
+				return "redirect:main.html";
 			} else {
 				model.addAttribute("invalid","Invalid login details.");
 				return "login";

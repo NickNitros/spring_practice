@@ -41,7 +41,7 @@ body {
 		<br />
 		<input type="submit" class="btn" value="Add" />
 	</form:form>
-	<br/>
-	<a href="/main.html">Back To Main</a>
+	<br />
+	<a href="./main.html">Back To Main</a>
 </body>
 </html>
