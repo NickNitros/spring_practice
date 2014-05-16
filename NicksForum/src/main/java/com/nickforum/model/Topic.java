@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Topic {
@@ -18,9 +19,11 @@ public class Topic {
 	private Long id;
 
 	@NotNull
+	@Size(min = 1, message="Title must not be blank!")
 	private String title;
 
 	@NotNull
+	@Size(min = 1, message="Description must not be blank!")
 	private String description;
 
 	@OneToMany(mappedBy = "topic", cascade = CascadeType.ALL, fetch = FetchType.LAZY)

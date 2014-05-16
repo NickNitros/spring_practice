@@ -13,9 +13,13 @@ public class TopicServiceImpl implements TopicService {
 
 	@Autowired
 	private TopicRepository topicRepository;
-	
+
 	public List<Topic> getAllTopics() {
 		return topicRepository.findAll();
+	}
+
+	public void save(Topic t) {
+		topicRepository.save(t);
 	}
 
 }

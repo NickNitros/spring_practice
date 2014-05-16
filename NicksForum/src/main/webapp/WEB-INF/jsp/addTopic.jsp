@@ -26,7 +26,7 @@ body {
 </style>
 </head>
 <body>
-	<h2>Register User</h2>
+	<h2>Add a Topic</h2>
 	<form:form commandName="topic">
 		<form:errors path="*" cssClass="errorblock" element="div" />
 		<label for="textinput1"> Enter Title: </label>
@@ -41,6 +41,7 @@ body {
 		<br />
 		<input type="submit" class="btn" value="Add" />
 	</form:form>
+	<br/>
 	<a href="/main.html">Back To Main</a>
 </body>
 </html>

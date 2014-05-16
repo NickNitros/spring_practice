@@ -31,6 +31,6 @@ body {
 	<c:if test="${empty topics}">
 		<div class="errorBlock">There are no topics.</div>
 	</c:if>
-	<a href="/addTopic.html">Add a Topic</a>
+	<a href="./addTopic.html">Add a Topic</a>
 </body>
 </html>

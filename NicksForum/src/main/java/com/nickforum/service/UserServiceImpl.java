@@ -19,21 +19,22 @@ public class UserServiceImpl implements UserService {
 	@PersistenceContext
 	private EntityManager em;
 
-	public boolean login(User u) {
+	public boolean login(String email, String password) {
 		
 		Query query = em.createQuery("SELECT new com.nickforum.model.User(u.id, u.name, u.email, u.password) FROM User u"
-				+ " WHERE u.email = '" + u.getEmail() + "'");
+				+ " WHERE u.email = '" + email + "'");
 
 		if(query.getResultList().isEmpty()) {
 			return false;
 		} else {
 			User inDB = (User)query.getResultList().get(0);
 			
-			return inDB.getPassword().equals(u.getPassword());
+			return inDB.getPassword().equals(password);
 		}
 	}
 
 	public void save(User u) {
+		System.out.println("-->This save has been called.");
 		userRepository.save(u);		
 	}
 

@@ -35,7 +35,7 @@ public class RegisterController {
 		} else {
 			System.out.println("User saved: " + user.getName() + " " + user.getEmail());
 			userService.save(user);
-			return "login";
+			return "redirect:login.html";
 		}
 	}
 }

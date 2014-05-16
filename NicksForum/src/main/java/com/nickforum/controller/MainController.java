@@ -13,7 +13,6 @@ import com.nickforum.model.Topic;
 import com.nickforum.service.TopicService;
 
 @Controller
-@SessionAttributes("topic")
 public class MainController {
 
 	@Autowired
