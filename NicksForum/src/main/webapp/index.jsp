@@ -1,5 +1,13 @@
 <html>
+<head>
+<title>Nicks Spring Forum</title>
+<style>
+body {
+	text-align: center;
+}
+</style>
+</head>
 <body>
-<h2>Hello World!</h2>
+	<jsp:forward page="/login.html"></jsp:forward>
 </body>
 </html>
