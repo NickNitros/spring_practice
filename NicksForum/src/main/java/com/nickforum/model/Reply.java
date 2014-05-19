@@ -19,6 +19,9 @@ public class Reply {
 	@ManyToOne
 	private Topic topic;
 
+	@ManyToOne
+	private User user;
+
 	public Reply() {
 
 	}
@@ -30,9 +33,6 @@ public class Reply {
 		this.topic = topic;
 		this.user = user;
 	}
-
-	@ManyToOne
-	private User user;
 
 	public Long getId() {
 		return id;
