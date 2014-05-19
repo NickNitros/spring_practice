@@ -12,31 +12,39 @@ import com.nickforum.repository.UserRepository;
 
 @Service("userService")
 public class UserServiceImpl implements UserService {
-	
+
 	@Autowired
 	private UserRepository userRepository;
-	
+
 	@PersistenceContext
 	private EntityManager em;
 
 	public boolean login(String email, String password) {
-		
-		Query query = em.createQuery("SELECT new com.nickforum.model.User(u.id, u.name, u.email, u.password) FROM User u"
-				+ " WHERE u.email = '" + email + "'");
 
-		if(query.getResultList().isEmpty()) {
+		Query query = em
+				.createQuery("SELECT new com.nickforum.model.User(u.id, u.name, u.email, u.password) FROM User u"
+						+ " WHERE u.email = '" + email + "'");
+
+		if (query.getResultList().isEmpty()) {
 			return false;
 		} else {
-			User inDB = (User)query.getResultList().get(0);
-			
+			User inDB = (User) query.getResultList().get(0);
+
 			return inDB.getPassword().equals(password);
 		}
 	}
 
 	public void save(User u) {
 		System.out.println("-->This save has been called.");
-		userRepository.save(u);		
+		userRepository.save(u);
 	}
 
-	
+	public boolean checkExists(String email) {
+		Query query = em
+				.createQuery("SELECT COUNT(u.email) FROM User u WHERE u.email = '"
+						+ email + "'");
+		int result = Integer.parseInt(query.getResultList().get(0).toString());
+		return result > 0;
+	}
+
 }

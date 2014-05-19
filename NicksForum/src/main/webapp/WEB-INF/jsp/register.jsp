@@ -27,6 +27,9 @@ body {
 </head>
 <body>
 	<h2>Register User</h2>
+	<c:if test="${!empty invalid}">
+		<div class="errorblock">${invalid}</div>
+	</c:if>
 	<form:form commandName="user">
 		<form:errors path="*" cssClass="errorblock" element="div" />
 		<label for="textinput1"> Enter Name: </label>
