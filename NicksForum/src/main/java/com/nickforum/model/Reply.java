@@ -6,6 +6,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Reply {
 
@@ -46,6 +48,7 @@ public class Reply {
 		return topic;
 	}
 
+	@JsonIgnore
 	public User getUser() {
 		return user;
 	}

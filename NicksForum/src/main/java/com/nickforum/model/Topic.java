@@ -11,6 +11,8 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Topic {
 
@@ -37,6 +39,7 @@ public class Topic {
 		return id;
 	}
 
+	@JsonIgnore
 	public List<Reply> getReplies() {
 		return replies;
 	}

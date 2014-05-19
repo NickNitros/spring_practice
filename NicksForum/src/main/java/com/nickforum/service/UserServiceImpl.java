@@ -1,5 +1,7 @@
 package com.nickforum.service;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -45,6 +47,15 @@ public class UserServiceImpl implements UserService {
 						+ email + "'");
 		int result = Integer.parseInt(query.getResultList().get(0).toString());
 		return result > 0;
+	}
+
+	public User findUser(Long id) {
+		System.out.println("Looking for " + id);
+		return userRepository.findOne(id);
+	}
+
+	public List<User> findAll() {
+		return userRepository.findAll();
 	}
 
 }

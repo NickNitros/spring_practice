@@ -35,7 +35,7 @@ public class User implements Serializable{
 	@Size(min=5, message="Password must be at least 5 characters!")
 	private String password;
 	
-	@OneToMany(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="user", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
 	private List<Reply> replies;
 
 	public User() {

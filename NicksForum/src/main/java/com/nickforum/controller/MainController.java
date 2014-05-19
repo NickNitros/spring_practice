@@ -24,7 +24,7 @@ public class MainController {
 	public String mainLoad(Model model, HttpSession session) {
 		try {
 			User current = (User) session.getAttribute("user");
-			System.out.println(current.getEmail());
+			System.out.println("Logged: " + current.getEmail());
 		} catch (Exception e) {
 			model.addAttribute("invalid", "You are not logged in.");
 			return "redirect:login.html";
