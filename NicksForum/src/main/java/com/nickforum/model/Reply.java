@@ -18,7 +18,19 @@ public class Reply {
 
 	@ManyToOne
 	private Topic topic;
-	
+
+	public Reply() {
+
+	}
+
+	public Reply(Long id, String text, Topic topic, User user) {
+		super();
+		this.id = id;
+		this.text = text;
+		this.topic = topic;
+		this.user = user;
+	}
+
 	@ManyToOne
 	private User user;
 

@@ -55,6 +55,6 @@ body {
 			</div>
 		</c:forEach>
 	</c:if>
-	<a href="./addReply.html">Add a Reply</a>
+	<a href="./addReply.html">Add a Reply</a> | <a href="./main.html">Back to Topics</a>
 </body>
 </html>
