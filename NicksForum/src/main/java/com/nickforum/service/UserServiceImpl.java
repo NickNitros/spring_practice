@@ -37,7 +37,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public void save(User u) {
-		System.out.println("-->This save has been called.");
 		userRepository.save(u);
 	}
 
@@ -56,6 +55,10 @@ public class UserServiceImpl implements UserService {
 
 	public List<User> findAll() {
 		return userRepository.findAll();
+	}
+
+	public void delete(Long id) {
+		userRepository.delete(id);
 	}
 
 }

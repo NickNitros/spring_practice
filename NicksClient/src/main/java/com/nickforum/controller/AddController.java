@@ -2,7 +2,6 @@ package com.nickforum.controller;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -10,13 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.nickforum.model.Topic;
-import com.nickforum.service.TopicService;
 
 @Controller
 public class AddController {
-
-	@Autowired
-	private TopicService topicService;
 	
 	@RequestMapping(value = "/addTopic", method = RequestMethod.GET)
 	public String getRegister(@ModelAttribute("topic") Topic topic) {
@@ -35,7 +30,7 @@ public class AddController {
 		} else {
 			System.out.println("Topic saved: " + topic.getTitle() + " "
 					+ topic.getDescription());
-			topicService.save(topic);
+		//	topicService.save(topic);
 			return "redirect:main.html";
 		}
 	}

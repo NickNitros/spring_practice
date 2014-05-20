@@ -15,4 +15,6 @@ public interface UserService {
 	boolean login(String email, String password);
 
 	void save(User u);
+	
+	void delete(Long id);
 }
