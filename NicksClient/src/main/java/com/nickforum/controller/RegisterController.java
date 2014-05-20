@@ -2,22 +2,20 @@ package com.nickforum.controller;
 
 import javax.validation.Valid;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.client.RestTemplate;
 
 import com.nickforum.model.User;
-import com.nickforum.service.UserService;
 
 @Controller
 public class RegisterController {
 
-	@Autowired
-	private UserService userService;
+	RestTemplate restTemp = new RestTemplate();
 
 	@RequestMapping(value = "/register", method = RequestMethod.GET)
 	public String getRegister(@ModelAttribute("user") User user) {
@@ -33,16 +31,16 @@ public class RegisterController {
 
 		if (result.hasErrors()) {
 			return "register";
-		} else {
-			if (!userService.checkExists(user.getEmail())) {
-				System.out.println("User saved: " + user.getName() + " "
-						+ user.getEmail());
-				userService.save(user);
-				return "redirect:login.html";
-			} else {
-				model.addAttribute("invalid", "That email already exists!");
-				return "register";
-			}
-		}
+		} /*
+		 * else { if (!userService.checkExists(user.getEmail())) {
+		 * System.out.println("User saved: " + user.getName() + " " +
+		 * user.getEmail()); userService.save(user); return
+		 * "redirect:login.html"; } else { model.addAttribute("invalid",
+		 * "That email already exists!"); return "register"; } }
+		 */
+
+		restTemp.postForEntity("http://localhost:8080/NicksForum/rest/user/create", user, User.class);
+
+		return "register";
 	}
 }

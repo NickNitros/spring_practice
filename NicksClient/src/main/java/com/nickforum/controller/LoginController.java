@@ -36,7 +36,7 @@ public class LoginController {
 		
 		if (result.hasErrors()) {
 			return "login";
-		} else {
+		} /*else {
 			// if login is successful
 			if(userService.login(user.getEmail(),user.getPassword())){
 				return "redirect:main.html";
@@ -44,6 +44,8 @@ public class LoginController {
 				model.addAttribute("invalid","Invalid login details.");
 				return "login";
 			}
-		}
+		}*/
+		
+		return "login";
 	}
 }

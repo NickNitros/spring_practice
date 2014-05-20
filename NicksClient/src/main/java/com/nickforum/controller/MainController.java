@@ -1,27 +1,26 @@
 package com.nickforum.controller;
 
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.client.RestTemplate;
 
 import com.nickforum.model.Topic;
 import com.nickforum.model.User;
-import com.nickforum.service.TopicService;
 
 @Controller
 public class MainController {
 
-	@Autowired
-	private TopicService topicService;
+	RestTemplate restTemp = new RestTemplate();
 
 	@RequestMapping(value = "main", method = RequestMethod.GET)
 	public String mainLoad(Model model, HttpSession session) {
+		System.out.println("Running main.");
 		try {
 			User current = (User) session.getAttribute("user");
 			System.out.println("Logged: " + current.getEmail());
@@ -30,8 +29,10 @@ public class MainController {
 			return "redirect:login.html";
 		}
 
-		List<Topic> topics = topicService.getAllTopics();
-
+		ResponseEntity<Topic[]> topicsList = restTemp.getForEntity(
+				"http://localhost:8080/NicksForum/rest/topics", Topic[].class);
+		System.out.println(topicsList);
+		Topic[] topics = topicsList.getBody();
 		model.addAttribute("topics", topics);
 
 		return "main";
