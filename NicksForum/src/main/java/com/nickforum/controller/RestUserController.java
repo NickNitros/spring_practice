@@ -33,6 +33,16 @@ public class RestUserController {
 		return userService.findUser(userId);
 	}
 
+	@RequestMapping(value = RestConstants.GET_USER_BY_EMAIL, method = RequestMethod.GET)
+	public @ResponseBody User getUser(@PathVariable("email") String email) {
+		try {
+			return userService.findByEmail(email);
+		} catch (Exception e) {
+			System.out.println("Error caught, null return.");
+			return null;
+		}
+	}
+
 	@RequestMapping(value = RestConstants.GET_ALL_USER, method = RequestMethod.GET)
 	public @ResponseBody List<User> getAllEmployees() {
 		return userService.findAll();

@@ -61,4 +61,11 @@ public class UserServiceImpl implements UserService {
 		userRepository.delete(id);
 	}
 
+	public User findByEmail(String email) {
+		Query query = em.createQuery("SELECT u FROM User u WHERE u.email = '"
+						+ email + "'");
+		User u = (User) query.getResultList().get(0);
+		return u;
+	}
+
 }

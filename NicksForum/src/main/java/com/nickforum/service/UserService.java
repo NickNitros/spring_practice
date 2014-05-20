@@ -8,6 +8,8 @@ public interface UserService {
 
 	User findUser(Long id);
 	
+	User findByEmail(String email);
+	
 	List<User> findAll();
 	
 	boolean checkExists(String email);
