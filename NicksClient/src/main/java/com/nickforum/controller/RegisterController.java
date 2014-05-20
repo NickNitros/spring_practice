@@ -38,8 +38,13 @@ public class RegisterController {
 		 * "redirect:login.html"; } else { model.addAttribute("invalid",
 		 * "That email already exists!"); return "register"; } }
 		 */
-
-		restTemp.postForEntity("http://localhost:8080/NicksForum/rest/user/create", user, User.class);
+		try {
+			restTemp.postForEntity(
+					"http://localhost:8080/NicksForum/rest/user/create", user,
+					User.class);
+		} catch (Exception e) {
+			model.addAttribute("invalid", e.getMessage());
+		}
 
 		return "register";
 	}
