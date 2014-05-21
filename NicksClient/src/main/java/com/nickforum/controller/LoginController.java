@@ -41,22 +41,15 @@ public class LoginController {
 			return "login";
 		} else {
 
-			ResponseEntity<User> userCheck = restTemp.getForEntity(
-					"http://localhost:8080/NicksForum/rest/user/email/"
-							+ user.getEmail(), User.class);
+			ResponseEntity<User> userCheck = restTemp.postForEntity(
+					"http://localhost:8080/NicksForum/rest/user/email", user,
+					User.class);
 			// check user exists
 			if (userCheck.getBody() == null) {
-				model.addAttribute("invalid", "User does not exist.");
+				model.addAttribute("invalid", "Invalid login details.");
 			} else {
-				System.out.println(userCheck);
-				model.addAttribute("invalid", "I will now check.");
+				return "redirect:main.html";
 			}
-			/*
-			 * if(userService.login(user.getEmail(),user.getPassword())){ return
-			 * "redirect:main.html"; } else {
-			 * model.addAttribute("invalid","Invalid login details."); return
-			 * "login"; }
-			 */
 		}
 
 		return "login";

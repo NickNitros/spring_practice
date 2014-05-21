@@ -6,6 +6,6 @@ import com.nickforum.model.Reply;
 
 public interface ReplyService {
 
-	List<Reply> getReplies(int topicID);
+	List<Reply> getReplies(Long topicID);
 
 }

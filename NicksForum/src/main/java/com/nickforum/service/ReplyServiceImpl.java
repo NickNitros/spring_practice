@@ -22,7 +22,7 @@ public class ReplyServiceImpl implements ReplyService {
 	private EntityManager em;
 
 	@SuppressWarnings("unchecked")
-	public List<Reply> getReplies(int topicID) {
+	public List<Reply> getReplies(Long topicID) {
 		Query query = em
 				.createQuery("SELECT new com.nickforum.model.Reply(r.id, r.text, r.topic, r.user) FROM Reply r WHERE r.topic.id = "
 						+ topicID + "");

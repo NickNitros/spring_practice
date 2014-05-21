@@ -32,7 +32,10 @@ public class MainController {
 				"http://localhost:8080/NicksForum/rest/topics", Topic[].class);
 		System.out.println(topicsList);
 		Topic[] topics = topicsList.getBody();
-		model.addAttribute("topics", topics);
+
+		if (topics.length > 0) {
+			model.addAttribute("topics", topics);
+		}
 
 		return "main";
 	}

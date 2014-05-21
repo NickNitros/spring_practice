@@ -33,10 +33,19 @@ public class RestUserController {
 		return userService.findUser(userId);
 	}
 
-	@RequestMapping(value = RestConstants.GET_USER_BY_EMAIL, method = RequestMethod.GET)
-	public @ResponseBody User getUser(@PathVariable("email") String email) {
+	
+	// rather post a user and then use it for authentication
+	@RequestMapping(value = RestConstants.GET_USER_BY_EMAIL, method = RequestMethod.POST)
+	public @ResponseBody User getUser(@RequestBody User user) {
 		try {
-			return userService.findByEmail(email);
+			User retrieved = userService.findByEmail(user.getEmail());
+			System.out.println("Retrieved: " + retrieved);
+			System.out.println("Received: " + user);
+			if(retrieved.getPassword().equals(user.getPassword())){
+				return retrieved;
+			} else {
+				return null;
+			}
 		} catch (Exception e) {
 			System.out.println("Error caught, null return.");
 			return null;

@@ -39,13 +39,13 @@ public class RestTopicController {
 	}
 
 	@RequestMapping(value = RestConstants.CREATE_TOPIC, method = RequestMethod.POST)
-	public @ResponseBody Topic createEmployee(@RequestBody Topic topic) {
+	public @ResponseBody Topic createTopic(@RequestBody Topic topic) {
 		topicService.save(topic);
 		return topic;
 	}
 
 	@RequestMapping(value = RestConstants.DELETE_TOPIC, method = RequestMethod.PUT)
-	public @ResponseBody Topic deleteEmployee(@PathVariable("id") Long topicId) {
+	public @ResponseBody Topic deleteTopic(@PathVariable("id") Long topicId) {
 		Topic topic = topicService.findTopic(topicId);
 		topicService.delete(topicId);
 		return topic;
