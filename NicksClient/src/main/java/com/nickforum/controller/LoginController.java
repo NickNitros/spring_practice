@@ -1,7 +1,12 @@
 package com.nickforum.controller;
 
+import java.io.IOException;
+
 import javax.validation.Valid;
 
+import org.codehaus.jackson.JsonGenerationException;
+import org.codehaus.jackson.map.JsonMappingException;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +24,8 @@ import com.nickforum.model.User;
 public class LoginController {
 
 	RestTemplate restTemp = new RestTemplate();
+
+	ObjectMapper mapper = new ObjectMapper();
 
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String login(Model model) {
@@ -41,15 +48,27 @@ public class LoginController {
 			return "login";
 		} else {
 
-			ResponseEntity<User> userCheck = restTemp.postForEntity(
-					"http://localhost:8080/NicksForum/rest/user/email", user,
-					User.class);
-			// check user exists
-			if (userCheck.getBody() == null) {
-				model.addAttribute("invalid", "Invalid login details.");
-			} else {
-				return "redirect:main.html";
+			try {
+				String json = mapper.writeValueAsString(user);
+				
+				ResponseEntity<String> authString = restTemp.postForEntity(
+						"http://localhost:8080/NicksForum/rest/user/auth", json,
+						String.class);
+				
+				System.out.println("Back here: " + authString.getBody());
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+				return "login";
 			}
+
+			/*
+			 * ResponseEntity<User> userCheck = restTemp.postForEntity(
+			 * "http://localhost:8080/NicksForum/rest/user/email", user,
+			 * User.class); // check user exists if (userCheck.getBody() ==
+			 * null) { model.addAttribute("invalid", "Invalid login details.");
+			 * } else { return "redirect:main.html"; }
+			 */
 		}
 
 		return "login";
