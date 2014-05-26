@@ -18,6 +18,10 @@ public class Authorised {
 	
 	@OneToOne
 	private User user;
+	
+	public Authorised() {
+		
+	}
 
 	public Authorised(String token, Date expiry, User user) {
 		super();

@@ -28,24 +28,26 @@ public class RestUserController {
 
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private AuthConfig authCon;
+
 	ObjectMapper mapper = new ObjectMapper();
 
 	@RequestMapping(value = RestConstants.AUTH_USER, method = RequestMethod.POST)
-	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public @ResponseBody String getAuthentication(@RequestBody String logString) {
 		try {
 			UserAuth ua = mapper.readValue(logString, UserAuth.class);
 			System.out.println("Got it: " + ua.getEmail());
-			
+
 			User logAttempt = userService.findByEmail(ua.getEmail());
-			
-			if(logAttempt == null){
+
+			if (logAttempt == null) {
 				return null;
 			}
-			
-			return AuthConfig.createAuthString(logAttempt);
-			
-			//AuthenticationServer.getAuthString(ua.getEmail());
+			System.out.println("Got user: " + logAttempt.getId() + " "
+					+ logAttempt);
+			return authCon.createAuthString(logAttempt);
+
 		} catch (JsonParseException e) {
 			e.printStackTrace();
 			return "401";
