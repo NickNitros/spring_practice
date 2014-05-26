@@ -12,12 +12,10 @@ import com.nickforum.service.AuthService;
 
 @Component
 public class AuthConfig {
-	
+
 	@Autowired
 	private AuthService authService;
-	
-	private static final AuthConfig authConfig = new AuthConfig();
-	
+
 	public String createAuthString(User user) {
 		String key = KeyGenerators.string().generateKey();
 		Authorised au = new Authorised(key,
@@ -30,12 +28,9 @@ public class AuthConfig {
 		try {
 			Authorised rec = authService.getAuth(auth);
 			return rec;
-		} catch(Exception e) {
+		} catch (Exception e) {
 			return null;
 		}
 	}
-	
-	public static AuthConfig getInstance() {
-		return authConfig;
-	}
+
 }

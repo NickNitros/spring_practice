@@ -7,7 +7,6 @@ import org.codehaus.jackson.JsonParseException;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.nickforum.model.Role;
 import com.nickforum.model.User;
@@ -28,6 +26,7 @@ public class RestUserController {
 
 	@Autowired
 	private UserService userService;
+	
 	@Autowired
 	private AuthConfig authCon;
 
@@ -41,6 +40,7 @@ public class RestUserController {
 
 			User logAttempt = userService.findByEmail(ua.getEmail());
 
+			// do properly
 			if (logAttempt == null) {
 				return null;
 			}
