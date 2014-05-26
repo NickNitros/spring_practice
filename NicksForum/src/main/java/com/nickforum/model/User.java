@@ -15,8 +15,6 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.springframework.security.core.token.Token;
-
 @Entity
 public class User implements Serializable {
 	

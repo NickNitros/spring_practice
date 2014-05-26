@@ -29,6 +29,10 @@ public class AuthServiceImpl implements AuthService {
 		Query query = em
 				.createQuery("SELECT new com.nickforum.model.Authorised FROM authorised a"
 						+ " WHERE a.token = '" + auth + "'");
+		
+		if(query.getResultList().isEmpty()) {
+			return null;
+		}
 
 		return (Authorised) query.getResultList().get(0);
 	}

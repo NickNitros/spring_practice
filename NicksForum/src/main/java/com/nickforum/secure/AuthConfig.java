@@ -10,12 +10,21 @@ import com.nickforum.model.Authorised;
 import com.nickforum.model.User;
 import com.nickforum.service.AuthService;
 
+
 @Component
 public class AuthConfig {
 
 	@Autowired
 	private AuthService authService;
 
+	/**
+	 * Create an authentication string for a provided user. This key gets stored
+	 * in the database
+	 * 
+	 * @param user
+	 *            The user requiring an authentication string
+	 * @return The authentication string
+	 */
 	public String createAuthString(User user) {
 		String key = KeyGenerators.string().generateKey();
 		Authorised au = new Authorised(key,
@@ -24,13 +33,32 @@ public class AuthConfig {
 		return key;
 	}
 
-	public Authorised validateAuthString(String auth) {
-		try {
-			Authorised rec = authService.getAuth(auth);
-			return rec;
-		} catch (Exception e) {
-			return null;
+	/**
+	 * Validates the provided authentication string against the database to
+	 * check validity
+	 * 
+	 * @param auth
+	 *            The authentication string
+	 * @return Authorised object with link to user
+	 * @throws AuthenticationFailedException
+	 *             If the authentication key does not match any active records
+	 */
+	public Authorised validateAuthString(String auth)
+			throws AuthenticationFailedException {
+		Authorised rec = authService.getAuth(auth);
+		if (rec == null) {
+			throw new AuthenticationFailedException();
 		}
+		return rec;
 	}
+}
 
+class AuthenticationFailedException extends Exception {
+
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	public String getMessage() {
+		return "Authentication has failed.";
+	}
 }

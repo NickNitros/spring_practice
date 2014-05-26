@@ -6,10 +6,10 @@ public class RestConstants {
 	
 	public static final String DUMMY_USER = "/rest/user/dummy";
 	public static final String GET_USER = "/rest/user/{id}";
-	public static final String GET_USER_BY_EMAIL = "/rest/user/email";
-	public static final String GET_ALL_USER = "/rest/protected/users";
+	public static final String GET_USER_BY_EMAIL = "/rest/protected/user/email/{authString}";
+	public static final String GET_ALL_USER = "/rest/protected/users/{authString}";
 	public static final String CREATE_USER = "/rest/user/create";
-	public static final String DELETE_USER = "/rest/user/delete/{id}";
+	public static final String DELETE_USER = "/rest/protected/user/delete/{id}/{authString}";
 
 	public static final String DUMMY_TOPIC = "/rest/topic/dummy";
 	public static final String GET_TOPIC = "/rest/topic/{id}";
